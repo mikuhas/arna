@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="components/loader.js"></script>
+    <script src="lib/onsenui/js/main.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+
+  <script>
+
+var ncmb = new NCMB(2ef27eec110112156995c97fe5a450be8f846500cb76a8bc44138adf96f41a84, 3a7f344e18dc7a595aaab3da554b989ee2aa4a0f3b8438a1b3ec69e0ac81c44d);
+
+const message =  "Hello";
+
+
+
+var new = function(){
+    var add_room = "";
+  add_room = document.getElementById('new_box').value;
+  ons.notification.alert(add_room+"を追加しました。");
+ Room.set("r_id", 1)
+          .set("r_name", add_room)
+          .save()
+          .then(function(Room){
+           // 保存後の処理
+          })
+          .catch(function(err){
+           // エラー処理
+          });
+}
+  </script>
+</head>
+<body>
+
+
+  <ons-navigator title="Navigator" id="myNavigator">
+  <ons-page>
+
+ <ons-tabbar hide-tabs="true">
+   <ons-tab label="tab1" page="tab0.html"></ons-tab>
+ </ons-tabbar>
+  </ons-page>
+  </ons-navigator>
+
+
+
+<ons-template id="tab0.html" >
+  <ons-page class="toppage">
+
+  <div class="top_container">
+    <main>
+      <h1><img src="images/icon.png"></h1>
+      <ons-tabbar position="bottom">
+        <ons-tab   onclick="myNavigator.pushPage('tab1.html', { animation : 'slide' } )"">モノを登録する</ons-tab>
+         <ons-tab  onclick="myNavigator.pushPage('tab1.html', { animation : 'slide' } )"">モノを登録する</ons-tab>
+      </ons-tabbar>
+    </main>
+  </div>
+    
+  </ons-page>
+  </ons-template>
+
+
+
+
+  <ons-template id="tab1.html">
+    <ons-page id="first-page">
+
+      <ons-toolbar>
+  <div class="left">
+    <ons-back-button>戻る</ons-back-button>
+  </div>
+  <div class="center">部屋名</div>
+  <div class="right">
+    <ons-toolbar-button>
+      <ons-icon icon="fa-bars">
+    </ons-toolbar-button>
+  </div>
+ </ons-toolbar>
+            <ons-list modifier="noborder">
+    <ons-list-item  modifier="tappable"  onclick="myNavigator.pushPage('tab2.html', { animation : 'slide' } )"">リビング</ons-list-item>
+    <ons-list-item modifier="tappable" page="tab2.html">キッチン</ons-list-item>
+    <ons-list-item  modifier="tappable" onclick="myNavigator.pushPage('new.html', { animation : 'slide' } )"">新規部屋追加</ons-list-item>
+    </ons-list>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="new.html">
+    <ons-page>
+       </ons-toolbar>
+<ons-toolbar>
+  <div class="left">
+    <ons-back-button>戻る</ons-back-button>
+  </div>
+  <div class="center">新規部屋追加</div>
+  <div class="right">
+    <ons-toolbar-button>
+      追加
+    </ons-toolbar-button>
+  </div>
+</ons-toolbar>
+            <ons-list modifier="noborder">
+    <ons-list-item><ons-input type="text" name="new_room" placeholder="追加したい部屋名を入力" id="new_box"></ons-input></ons-list-item>
+    </ons-list>
+    </ons-page>
+  </ons-template>
+
+
+
+  <ons-template id="tab2.html">
+    <ons-page id="second-page">
+       </ons-toolbar>
+<ons-toolbar>
+  <div class="left">
+    <ons-back-button>戻る</ons-back-button>
+  </div>
+  <div class="center">家具名</div>
+  <div class="right">
+    <ons-toolbar-button>
+      <ons-icon icon="fa-bars">
+    </ons-toolbar-button>
+  </div>
+</ons-toolbar>
+
+            <ons-list modifier="noborder">
+    <ons-list-item  modifier="tappable" ><li>タンス</li></ons-list-item>
+    <ons-list-item modifier="tappable" page="tab2.html">クローゼット</ons-list-item>
+    </ons-list>
+    </ons-page>
+  </ons-template>
+</body>
+</html>
