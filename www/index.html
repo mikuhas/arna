@@ -13,17 +13,18 @@
   <script src="components/loader.js"></script>
     <script src="lib/onsenui/js/main.js"></script>
   <script src="lib/onsenui/js/onsenui.min.js"></script>
-
+  <script src="lib/onsenui/js/jquery-3.2.1.min.js"></script>
+ <script src="lib/onsenui/js/list.js"></script>
+  <script src="lib/onsenui/js/camera.js"></script>
 
   <script>
 
-var ncmb = new NCMB(2ef27eec110112156995c97fe5a450be8f846500cb76a8bc44138adf96f41a84, 3a7f344e18dc7a595aaab3da554b989ee2aa4a0f3b8438a1b3ec69e0ac81c44d);
+var ncmb = new NCMB("2ef27eec110112156995c97fe5a450be8f846500cb76a8bc44138adf96f41a84", "3a7f344e18dc7a595aaab3da554b989ee2aa4a0f3b8438a1b3ec69e0ac81c44d");
 
-const message =  "Hello";
+var room = ncmb.DataStore("room");
+var Room = new room();
 
-
-
-var new = function(){
+var add_r = function(){
     var add_room = "";
   add_room = document.getElementById('new_box').value;
   ons.notification.alert(add_room+"を追加しました。");
@@ -44,7 +45,6 @@ var new = function(){
 
   <ons-navigator title="Navigator" id="myNavigator">
   <ons-page>
-
  <ons-tabbar hide-tabs="true">
    <ons-tab label="tab1" page="tab0.html"></ons-tab>
  </ons-tabbar>
@@ -103,7 +103,7 @@ var new = function(){
   </div>
   <div class="center">新規部屋追加</div>
   <div class="right">
-    <ons-toolbar-button>
+    <ons-toolbar-button onclick="add_r() ,myNavigator.pushPage('tab1.html', { animation : 'slide' } )"  >
       追加
     </ons-toolbar-button>
   </div>
@@ -132,10 +132,68 @@ var new = function(){
 </ons-toolbar>
 
             <ons-list modifier="noborder">
-    <ons-list-item  modifier="tappable" ><li>タンス</li></ons-list-item>
+    <ons-list-item  modifier="tappable">タンス</ons-list-item>
     <ons-list-item modifier="tappable" page="tab2.html">クローゼット</ons-list-item>
     </ons-list>
+    <input type="button" id="kagu" value="push" onclick="
+		let camera = navigator.camera;
+        const srcType = camera.PictureSourceType.CAMERA;
+  
+		let options = setOptions(srcType);
+
+		options.targetHeight = PICTURE_MAX_HEIGHT;
+		options.targetWidth = PICTURE_MAX_WIDTH;
+		
+		$('#p_result').html('open camera');
+		camera.getPicture(onSuccess, onError);
+        
+        
+
+
+		function onSuccess(imageURI){
+		
+			let img = new Image();
+            
+
+			img.src = imageURI;
+			img.height = PICTURE_MAX_HEIGHT;
+            img.width  = PICTURE_MAX_WIDTH;
+			$('#div_image').html('');
+			$('#div_image').append(img);
+
+
+			item = new Item();
+    		$('#p_result').text('analyze picture...');
+			getFileEntry(imageURI, analyseImage);
+		}
+">
     </ons-page>
   </ons-template>
 </body>
+<style>
+.toppage .page__background{
+  background:#ff9064;
+}
+
+h1{
+  font-size: 20px;
+  color:white;
+  margin:0 auto;
+  text-align: center;
+  font-weight: 500;
+  left:0;
+  right:0;
+}
+h1 img{
+  width:50%;
+  position:absolute;
+  top:10vh; left:0; right:0;
+  margin:auto;
+}
+
+.new_box{
+  width:60%;
+}
+
+  </style>
 </html>
