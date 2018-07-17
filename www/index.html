@@ -21,8 +21,29 @@
 
 var ncmb = new NCMB("2ef27eec110112156995c97fe5a450be8f846500cb76a8bc44138adf96f41a84", "3a7f344e18dc7a595aaab3da554b989ee2aa4a0f3b8438a1b3ec69e0ac81c44d");
 
-var room = ncmb.DataStore("room");
-var Room = new room();
+var select_f = function(){
+    var add_room = "";
+ var Room = ncmb.DataStore("room");
+ var room = new Room({r_name: add_room});//add_room=部屋名
+ var Furniture = ncmb.DataStore("Furniture");
+ var furniture = new Furniture({furniture: "家具名"});
+ room.set("furniture", furniture);
+
+// // foodと共にcomponentも保存される
+ room.save()
+     .then(function(room){
+//       // 保存後処理
+
+     })
+     .catch(function(err){
+//       // エラー処理
+     });
+
+};
+
+
+// var room = ncmb.DataStore("room");
+// var Room = new room();
 
 var add_r = function(){
     var add_room = "";
@@ -37,7 +58,13 @@ var add_r = function(){
           .catch(function(err){
            // エラー処理
           });
-}
+};
+
+
+
+
+
+
   </script>
 </head>
 <body>
@@ -59,10 +86,10 @@ var add_r = function(){
   <div class="top_container">
     <main>
       <h1><img src="images/icon.png"></h1>
-      <ons-tabbar position="bottom">
-        <ons-tab   onclick="myNavigator.pushPage('tab1.html', { animation : 'slide' } )"">モノを登録する</ons-tab>
-         <ons-tab  onclick="myNavigator.pushPage('tab1.html', { animation : 'slide' } )"">モノを登録する</ons-tab>
-      </ons-tabbar>
+   <div class="button-height">
+        <ons-button  modifier="large" onclick="myNavigator.pushPage('tab1.html', { animation : 'slide' } )"">モノを登録する</ons-button>
+         <ons-button modifier="large" onclick="myNavigator.pushPage('tab1.html', { animation : 'slide' } )"">モノを探す</ons-button>
+      </div>
     </main>
   </div>
     
@@ -132,7 +159,7 @@ var add_r = function(){
 </ons-toolbar>
 
             <ons-list modifier="noborder">
-    <ons-list-item  modifier="tappable">タンス</ons-list-item>
+    <ons-list-item  modifier="tappable" onclick="select_f ()">タンス</ons-list-item>
     <ons-list-item modifier="tappable" page="tab2.html">クローゼット</ons-list-item>
     </ons-list>
     <input type="button" id="kagu" value="push" onclick="
@@ -171,6 +198,8 @@ var add_r = function(){
   </ons-template>
 </body>
 <style>
+
+
 .toppage .page__background{
   background:#ff9064;
 }

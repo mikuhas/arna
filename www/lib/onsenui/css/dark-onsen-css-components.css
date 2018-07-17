@@ -1418,7 +1418,7 @@ h4, h5, h6 {
   padding: 4px 12px;
   display: block;
   width: 100%;
-  text-align: center;
+  bottom:0;
 }
 .button--large:active {
   background-color: #ffa101;
